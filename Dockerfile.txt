@@ -1,0 +1,15 @@
+FROM ubuntu:20.04
+
+# Install Apache
+RUN apt-get update && \
+    apt-get install -y apache2 && \
+    apt-get clean
+
+# Copy your project files into the web root
+COPY . /var/www/html/
+
+# Make Apache listen on port 82
+EXPOSE 82
+
+# Start Apache in the foreground
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
